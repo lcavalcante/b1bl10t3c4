@@ -20,10 +20,10 @@ import codecs
 index = codecs.open('index.html', 'r')
 
 
-class MainPage(webapp2.RequestHandler):
+class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(index.read())
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/', MainHandler)
 ], debug=True)
