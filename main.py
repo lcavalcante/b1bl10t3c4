@@ -15,12 +15,15 @@
 # limitations under the License.
 #
 import webapp2
+import codecs
+
+index = codecs.open('index.html', 'r')
 
 
-class MainHandler(webapp2.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        self.response.write(index.read())
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainPage)
 ], debug=True)
