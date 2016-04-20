@@ -14,8 +14,8 @@ def all_books():
     return Book.query()
 
 
-def insert_book(title, author, price, desc, photo):
-    book = Book(title=title, author=author, price=price, desc=desc, photo=photo)
+def insert_book(id, title, author, price, desc, photo):
+    book = Book(id=id, title=title, author=author, price=price, desc=desc, photo=photo)
     book.put()
     return book
 

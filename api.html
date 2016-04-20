@@ -1,0 +1,24 @@
+<h1>API b1bl10t3c4</h1>
+<hr>
+<div id="book"><h2>book</h2>
+    <p>Representa um livro.</p>
+    <h3>GET /api/book/</h3>
+    <p>Recebe uma lista de todos os livros cadastrados no formato JSON. Exemplo:</p>
+    <h3>POST /api/books/</h3>
+    <p>Adiciona um novo livro na biblioteca. O corpo da mensagem deve estar em formato JSON. Os seguintes campos são
+        necessários:
+    <p>
+    <ul>
+        <li>title: Título do livro.</li>
+        <li>authors: Autores do livro (separados por vírgula).</li>
+        <li>desc: Descrição do livro.</li>
+        <li>price: Preço do livro.</li>
+        <li>photo: Foto da capa do livro.</li>
+    </ul>
+    <h3>PUT /api/books/:id</h3>
+    <p>Substitui um livro já existente. Um documento no formato JSON contendo os mesmos atributos do método POST deve
+        ser enviado no corpo da mensagem.</p>
+    <h3>DELETE /api/books/:id</h3>
+    <p>Deleta um livro existente com id infomrado.</p>
+</div>
+<hr>
