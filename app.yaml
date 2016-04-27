@@ -22,6 +22,10 @@ handlers:
 - url: /api/.*
   script: api.app
 
+- url: /contador
+  static_files: contador.html
+  upload: contador.html
+
 - url: (.*)/
   static_files: index.html
   upload: index.html

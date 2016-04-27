@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+</head>
+<body ng-app = "timer">
+
+    <div ng-controller="timerController as time">
+        <h1>Counter</h1>
+
+        <form>
+            Final Value:<br />
+            <input type="number" name="valor_final" ng-model="time.total"><br />
+            MS:<br />
+            <input type="number" name="ms" ng-model="time.ms"><br />
+            <button ng-disabled="time.isActive" ng-click="time.start()">Start</button>
+            <button ng-disabled="!time.isActive" ng-click="time.pause()">Pause</button>
+            <button ng-disabled="time.isActive" ng-click="time.reset()">Reset</button>
+            <h1>{{time.counter}}</h1>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="js/timer.js"></script>
+</body>
+</html>
