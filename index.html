@@ -3,85 +3,49 @@
     <head>
         <title>First Week</title>
 	    <meta charset='UTF-8'>
-        <link rel="stylesheet" href="css/style.css">
+
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     </head>
     <body ng-app = "lib">
-        <header>
-            <h1>Exercicio1 - P3</h1>
-        </header>
-            <section id="intro">
-            <h2>Exercicio 1</h2>
-                <p>Escreva uma pequena aplicação em AngularJS que permita visualizar e editar uma pequena base de dados fictícia de livros para uma livraria. Os dados para sua aplicação devem ser lidos de um script em separado que deve conter apenas o modelo de dados em uma variável única e global chamada "lib" (não requer AJAX, apenas adicione um tag script adicional que leia o script com os dados para o namespace global). A base de dados deve conter, no mínimo, 10 itens ao ser lida. Cada item deve conter: título, lista de autores, uma breve descrição do livro, a url de uma foto da capa, uma breve descrição e o preço. A aplicação deve permitir adicionar novos livros e editar os dados dos livros existentes. Também deve permitir que sejam criados comentários pelos usuários para cada livro.</p>
-        </section>
-        <div ng-controller = "libController as lib">
-            <section id ="listLivros">
-                <h2>Titulo: {{lib.livro.titulo}}</h2>
-                <img src ={{lib.livro.foto}} height="48" width="48">
-                <p>Descrição: {{lib.livro.desc}}</p>
-                <button ng-click = "lib.prev()">Prev</button>
-                <button ng-click = "lib.next()">Next</button>
-                <form ng-submit="lib.addComment(lib.newComment)">
-                    <input type="text" ng-model="lib.newComment">
-                    <br />
-                    <button type=submit>Adicionar comentario</button>
-                </form>
-            </section>
-            <section id="tableLivros">
-                <br />
-                <h3>Livros</h3>
-                <table id="t1">
-                <tr>
-                    <th>Titulo</th>
-                    <th>Autor(es)</th>
-                    <!--<th>Descrição</th>
-                    <th>Foto</th>-->
-                    <th>Preço</th>
-                </tr>
-                <tr ng-repeat = "livro in lib.livros">
-                    <td>{{ livro.titulo }}</td>
-                    <td>{{ livro.autores }}</td>
-                    <!--<td>{{ livro.desc }}</td>
-                    <td>{{ livro.foto }}</td>-->
-                    <td>{{ livro.preco }}</td>
-                </tr>
-                </table>
-            </section>
-            <section id="gerenciarLivros">
-                <h3>Gerenciar Livros</h3>
-                    <p>Indice Livro: {{lib.indiceLivro}}</p>
-                    <button ng-click = "lib.prev()">Prev</button>
-                    <button ng-click = "lib.next()">Next</button>
-                <form ng-submit="lib.updateLivro(lib.indiceLivro, lib._Title, lib._Autor, lib._Desc, lib_Foto, lib._Preco)">
-                    <input type"text" ng-model="lib._Title">
-                    <input type"text" ng-model="lib._Autor">
-                    <input type"text" ng-model="lib._Desc">
-                    <input type"text" ng-model="lib._Foto">
-                    <input type"number" ng-model="lib._Preco">
-
-                    <br />
-                    <button type="submit">Modificar Livro</button>
-                </form>
-            </section>
-
-            <section id ="adicionarLivro">
-                <h3>Adicionar Livros</h3>
-                <form ng-submit="lib.addLivro(lib.newTitle, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)">
-                    <input type"text" ng-model="lib.newTitle">
-                    <input type"text" ng-model="lib.newAutor">
-                    <input type"text" ng-model="lib.newDesc">
-                    <input type"text" ng-model="lib.newFoto">
-                    <input type"number" ng-model="lib.newPrice">
-
-                    <br />
-                    <button type="submit">Adicionar Livro</button>
-                </form>
-            </section>
-        </div>
-        <footer>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo right">B1bl10t3c4</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="hide-on-med-and-down">
+                    <li><a href="/contador">Contador</a></li>
+                    <li><a href="/api">API</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <<li><a href="/contador">Contador</a></li>
+                    <li><a href="/api">API</a></li>
+                </ul>
+            </div>
+        </nav>
+         <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">B1bl10t3c4</h5>
+                <p class="grey-text text-lighten-4">Aplicação em AngularJs desenvolvida para a disciplina P3</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
             Lucas Cavalcante
+            <a class="grey-text text-lighten-4 right" href="#!">https://github.com/lcavalcante</a>
+            </div>
+          </div>
         </footer>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
         <script src="js/db.js"></script>
         <script src="js/lib.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>
