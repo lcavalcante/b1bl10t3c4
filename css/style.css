@@ -7,3 +7,8 @@
   main {
     flex: 1 0 auto;
   }
+
+  .area {
+    font-size: 12px;
+    line-height: 0rem;
+}
