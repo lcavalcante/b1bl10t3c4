@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en-US'>
 <head>
-    <title>First Week</title>
+    <title>B1bl10t3c4</title>
     <meta charset='UTF-8'>
 
     <!--Import Google Icon Font-->
@@ -26,71 +26,45 @@
         </ul>
     </div>
 </nav>
-<div class="container">
+<div class="container" ng-controller="libController as lib">
+    <div class="fixed-action-btn hide-on-med-and-down" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large waves-effect waves-light red" style="bottom: 45px; right: 24px;">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
     <div class="section">
-        <div class="row" style="position: relative">
-            <div class="col s12 m12 l4" style="position: absolute; ">
+        <div class="row">
+            <div class="col s12 m12 l4" ng-repeat="livro in lib.livros">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <a href="#">
-                            <img width="305" height="227"
-                                 src="http://www.konraddobson.com/content/illustration/doedemee/lotr-cover_v1-5-8-3.jpg"
-                                 class="responsive-img ">
+                            <img src="{{livro.foto}}"
+                                 class="responsive-img">
                         </a>
                     </div>
                     <div class="card-content">
                         <p class="area">
-                            <a href="#">J.R.R Tolkien</a>
+                            <a href="#">{{livro.autores}}</a>
                         </p>
                         <a href="#">
-                            <span class="card-title activator pink-text text-darken-4">The Lord of the Rings</span>
+                            <span class="card-title activator pink-text text-darken-4">{{livro.titulo}}</span>
                         </a>
 
                     </div>
-                </div>
-            </div>
-            <div class="col s12 m12 l4" style="position: absolute;">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <a href="#">
-                            <img width="305" height="227"
-                                 src="http://www.konraddobson.com/content/illustration/doedemee/lotr-cover_v1-5-8-3.jpg"
-                                 class="responsive-img ">
+                    <div class="fixed-action-btn horizontal click-to-toggle" style="position: relative; height:70 px; float: right; ">
+                        <a class="btn-floating btn-large red">
+                          <i class="material-icons">menu</i>
                         </a>
-                    </div>
-                    <div class="card-content">
-                        <p class="area">
-                            <a href="#">J.R.R Tolkien</a>
-                        </p>
-                        <a href="#">
-                            <span class="card-title activator pink-text text-darken-4">The Lord of the Rings</span>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m12 l4" style="position: absolute;">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <a href="#">
-                            <img width="305" height="227"
-                                 src="http://www.konraddobson.com/content/illustration/doedemee/lotr-cover_v1-5-8-3.jpg"
-                                 class="responsive-img ">
-                        </a>
-                    </div>
-                    <div class="card-content">
-                        <p class="area">
-                            <a href="#">J.R.R Tolkien</a>
-                        </p>
-                        <a href="#">
-                            <span class="card-title activator pink-text text-darken-4">The Lord of the Rings</span>
-                        </a>
-
+                        <ul>
+                          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                          <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <footer class="page-footer">
@@ -111,6 +85,7 @@
 </footer>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <script src="js/db.js"></script>
 <script src="js/lib.js"></script>
