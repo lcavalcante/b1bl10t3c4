@@ -1,8 +1,8 @@
 var lib = angular.module("lib", []);
-
+var victor = null;
 angular.module('lib').controller('libController', function (){
     var self = this;
-
+    victor = self;
     self.livros = [];
     self.livros.push(l1);
     self.livros.push(l2);
@@ -16,6 +16,8 @@ angular.module('lib').controller('libController', function (){
     self.livros.push(l10);
 
     self.indiceLivro = 0;
+    
+    self.selected = null;
 
     self.livro = self.livros[self.indiceLivro];
 
@@ -32,9 +34,19 @@ angular.module('lib').controller('libController', function (){
         self.livros[indice].setFoto(foto);
         self.livros[indice].setPreco(preco);
     }
+    
+    self.deleteLivro = function(index){
+        if (index > -1){
+            self.livros.splice(index,1);
+        }
+    }
 
     self.addComment = function(comment){
         self.livro.setComment(comment);
+    }
+    
+    self.select = function(book){
+        self.selected = book;
     }
 
     self.next = function(){

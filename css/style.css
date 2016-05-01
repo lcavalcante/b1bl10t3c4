@@ -1,7 +1,7 @@
 body {
-display: flex;
-min-height: 100vh;
-flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 main {
@@ -14,11 +14,24 @@ line-height: 0rem;
 }
 
 .card-image{
-max-height:500px;
+max-height:400px;
 }
 
-.card-title{
-    font-size:20px;
+.btn-xmall {
+    font-size: 12px;
+    padding: 5px;
+}
+
+.top-right {
+    position:absolute; 
+    top:0; 
+    right:20px;
+}
+
+.bottom-right {
+    position:absolute; 
+    bottom: -20px; 
+    right:1px;
 }
 
 footer.page-footer{
