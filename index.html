@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <input data-ng-model="lib.selected.preco" id="editPreco" type="number" step="0.01"
-                                   class="validate">
+                            class="validate">
                             <!--<label for="editPreco">Preço</label>-->
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <input data-ng-model="lib.selected.autores" placeholder="URL da imagem" id="editFoto"
-                                   type="url" accept=".jpg" class="validate">
+                            type="url" accept=".jpg" class="validate">
                             <!--<label for="editFoto">Foto</label>-->
                         </div>
                     </div>
@@ -130,14 +130,14 @@
                     <div class="row">
                         <label for="editDesc">Descrição</label>
                         <textarea data-ng-model="lib.selected.desc" id="editDesc"
-                                  class="materialize-textarea"></textarea>
+                        class="materialize-textarea"></textarea>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
             <a data-ng-click="lib.updateLivro(lib.livros[lib.id].titulo, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)"
-               href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
+            href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
         </div>
     </div>
 
@@ -147,14 +147,11 @@
                 <div class="card ">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="fixed-action-btn top-right">
-                            <a data-ng-click="lib.deleteLivro(0)" class="btn-floating waves-effect waves-light red"
-                               style="z-index:10">
-                                <i class="material-icons">remove</i>
-                            </a>
+
                         </div>
                         <!--suppress HtmlUnknownTarget -->
                         <img src="{{livro.foto}}"
-                             class="responsive-img activator">
+                        class="responsive-img activator">
                     </div>
                     <div class="card-content">
                         <p class="area">
@@ -176,12 +173,19 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a data-ng-click="lib.select(livro)" class="btn-floating yellow darken-1 modal-trigger"
-                                           href="#commentModal">
+                                        <a data-ng-click="lib.select(livro)"
+                                        class="btn-floating yellow darken-1 modal-trigger"
+                                        href="#commentModal">
                                             <i class="material-icons">comment</i>
                                         </a>
                                     </li>
-                                    <li><a data-ng-click="lib.select(livro)" class=" modal-trigger btn-floating blue" href="#editBook"><i class="material-icons">mode_edit</i></a></li>
+                                    <li><a data-ng-click="lib.select(livro)" class=" modal-trigger btn-floating blue"
+                                        href="#editBook"><i class="material-icons">mode_edit</i></a></li>
+                                    <li>
+                                        <a data-ng-click="lib.select(livro);lib.deleteLivro(lib.findLivro(lib.selected.titulo))" class="btn-floating red">
+                                            <i class="material-icons">remove</i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -191,16 +195,51 @@
         </div>
         <div id="commentModal" class="modal bottom-sheet">
             <div class="modal-content">
-                <ul class="collapsible" data-collapsible="accordion"  ng-repeat="comment in lib.selected.comments">
+                <ul class="collapsible" data-collapsible="accordion" ng-repeat="comment in lib.selected.comments">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">format_quote</i>{{comment.titulo}}</div>
+                        <div class="collapsible-header"><i class="material-icons">format_quote</i>{{comment.titulo}}
+                        </div>
                         <div class="collapsible-body"><p>{{comment.texto}}</p></div>
                     </li>
                     <script>$('.collapsible').collapsible();</script>
                 </ul>
             </div>
             <div class="modal-footer">
-                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <a href="#addComment" class="modal-trigger modal-action modal-close waves-effect waves-green btn-flat">Adicionar</a>
+            </div>
+        </div>
+        <div id="addComment" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Adicionar Comentario</h4>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input data-ng-model="lib.newCommentTitle" id="addTitle" type="text" class="validate">
+                                <label for="addTitle">Título</label>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input data-ng-model="lib.newCommentAutor" id="addAutor" type="text" class="validate">
+                                <label for="addAutor">Autor</label>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="col s12">
+                        <div class="row">
+                            <label for="addDesc">Descrição</label>
+                        <textarea data-ng-model="lib.newCommentDesc" id="addDesc"
+                            class="materialize-textarea"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a data-ng-click="lib.selected.addComment(lib.newCommentAutor, lib.newCommentTitle, lib.newCommentDesc)"
+                href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
             </div>
         </div>
     </div>
