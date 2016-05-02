@@ -1,6 +1,8 @@
-var lib = angular.module("lib", []);
+"use strict";
+
 var victor = null;
-angular.module('lib').controller('libController', function (){
+angular.module("lib", [])
+    .controller('libController', function (){
     var self = this;
     victor = self;
     self.livros = [];
@@ -25,7 +27,7 @@ angular.module('lib').controller('libController', function (){
     self.addLivro = function(titulo, autores, desc, foto, preco){
         var novoLivro = new Livro(titulo, autores, desc, foto, preco);
         self.livros.push(novoLivro);
-    }
+    };
 
     self.updateLivro = function(indice, titulo, autores, desc, foto, preco){
         self.livros[indice].setTitulo(titulo);
@@ -33,21 +35,21 @@ angular.module('lib').controller('libController', function (){
         self.livros[indice].setDesc(desc);
         self.livros[indice].setFoto(foto);
         self.livros[indice].setPreco(preco);
-    }
+    };
     
     self.deleteLivro = function(index){
         if (index > -1){
             self.livros.splice(index,1);
         }
-    }
+    };
 
     self.addComment = function(comment){
         self.livro.setComment(comment);
-    }
+    };
     
     self.select = function(book){
         self.selected = book;
-    }
+    };
 
     self.next = function(){
         self.indiceLivro += 1;
@@ -55,7 +57,7 @@ angular.module('lib').controller('libController', function (){
             self.indiceLivro = 0;
         }
         self.livro = self.livros[self.indiceLivro];
-    }
+    };
     self.prev = function(){
         self.indiceLivro -= 1;
         if(self.indiceLivro < 0){

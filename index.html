@@ -10,25 +10,30 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection"/>
 </head>
-<body ng-app="lib">
+<body data-ng-app="lib">
 <nav class="cyan lighten-2">
     <div class="nav-wrapper container">
         <a href="#" class="brand-logo right">B1bl10t3c4</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="hide-on-med-and-down">
-            <li><a href="/contador">Contador</a></li>
-            <li><a href="/api">API</a></li>
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/contador">Contador</a></li>
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/api">API</a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
             <
-            <li><a href="/contador">Contador</a></li>
-            <li><a href="/api">API</a></li>
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/contador">Contador</a></li>
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/api">API</a></li>
         </ul>
     </div>
 </nav>
-<div class="container" ng-controller="libController as lib">
+<div class="container" data-ng-controller="libController as lib">
     <div class="fixed-action-btn" style="bottom: 5px; right: 24px;">
-        <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-3" style="bottom: 45px; right: 24px;"
+        <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-3"
+           style="bottom: 45px; right: 24px;"
            href=#addBook>
             <i class="material-icons">add</i>
         </a>
@@ -40,7 +45,7 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.newTitle" id="titulo" type="text" class="validate">
+                            <input data-ng-model="lib.newTitle" id="titulo" type="text" class="validate">
                             <label for="titulo">Título</label>
                         </div>
                     </div>
@@ -48,7 +53,7 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.newAutor" id="autor" type="text" class="validate">
+                            <input data-ng-model="lib.newAutor" id="autor" type="text" class="validate">
                             <label for="autor">Autor</label>
                         </div>
                     </div>
@@ -64,84 +69,92 @@
                 <form class="col s6 ">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.newFoto" placeholder="URL da imagem" id="foto" type="url" accept=".jpg" class="validate">
+                            <input data-ng-model="lib.newFoto" placeholder="URL da imagem" id="foto" type="url"
+                                   accept=".jpg" class="validate">
                             <label for="foto">Foto</label>
                         </div>
                     </div>
                 </form>
                 <form class="col s12">
                     <div class="row">
-                        <label for="textarea1">Descrição</label>
-                        <textarea ng-model="lib.newDesc" id="desc" class="materialize-textarea"></textarea>
+                        <label for="desc">Descrição</label>
+                        <textarea data-ng-model="lib.newDesc" id="desc" class="materialize-textarea"></textarea>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
-        <a ng-click="lib.addLivro(lib.newTitle, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
+            <a data-ng-click="lib.addLivro(lib.newTitle, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)" href="#"
+               class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
         </div>
-    </div>    
+    </div>
     <div id="editBook" class="modal modal-fixed-footer">
         <div class="modal-content">
-            <h4>Adicionar Livro</h4>
+            <h4>Editar Livro</h4>
             <div class="row">
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.livros[0].titulo" id="titulo" type="text" class="validate">
-                            <label for="titulo">Título</label>
+                            <input data-ng-model="lib.selected.titulo" id="edtTitulo" type="text" class="validate">
+                            <!--<label for="edtTitulo">Título</label>-->
                         </div>
                     </div>
                 </form>
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.livros[0].autores" id="autor" type="text" class="validate">
-                            <label for="autor">Autor</label>
+                            <input data-ng-model="lib.selected.autores" id="editAutor" type="text" class="validate">
+                            <!--<label for="editAutor">Autor</label>-->
                         </div>
                     </div>
                 </form>
                 <form class="col s6">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.livros[0].preco" id="preco" type="number" step="0.01" class="validate">
-                            <label for="preco">Preço</label>
+                            <input data-ng-model="lib.selected.preco" id="editPreco" type="number" step="0.01"
+                                   class="validate">
+                            <!--<label for="editPreco">Preço</label>-->
                         </div>
                     </div>
                 </form>
                 <form class="col s6 ">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="lib.livros[0].autores" placeholder="URL da imagem" id="foto" type="url" accept=".jpg" class="validate">
-                            <label for="foto">Foto</label>
+                            <input data-ng-model="lib.selected.autores" placeholder="URL da imagem" id="editFoto"
+                                   type="url" accept=".jpg" class="validate">
+                            <!--<label for="editFoto">Foto</label>-->
                         </div>
                     </div>
                 </form>
                 <form class="col s12">
                     <div class="row">
-                        <label for="Desc">Descrição</label>
-                        <textarea ng-model="lib.livros[0].autores" id="desc" class="materialize-textarea"></textarea>
+                        <label for="editDesc">Descrição</label>
+                        <textarea data-ng-model="lib.selected.desc" id="editDesc"
+                                  class="materialize-textarea"></textarea>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
-        <a ng-click="lib.updateLivro(lib.livros[lib.id].titulo, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
+            <a data-ng-click="lib.updateLivro(lib.livros[lib.id].titulo, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)"
+               href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
         </div>
     </div>
-          
+
     <div class="section">
         <div class="row">
-            <div class="col s12 m12 l4" ng-repeat="livro in lib.livros">
+            <div class="col s12 m12 l4" data-ng-repeat="livro in lib.livros">
                 <div class="card ">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="fixed-action-btn top-right">
-                            <a ng-click="lib.deleteLivro(0)" class="btn-floating waves-effect waves-light red" style="z-index:10">
+                            <a data-ng-click="lib.deleteLivro(0)" class="btn-floating waves-effect waves-light red"
+                               style="z-index:10">
                                 <i class="material-icons">remove</i>
                             </a>
                         </div>
-                        <img ng-click="lib.select(livro)" src="{{livro.foto}}"
-                             class="responsive-img activator">                 
+                        <!--suppress HtmlUnknownTarget -->
+                        <img src="{{livro.foto}}"
+                             class="responsive-img activator">
                     </div>
                     <div class="card-content">
                         <p class="area">
@@ -152,41 +165,42 @@
                         </a>
                     </div>
                     <div class="card-reveal">
-                            <span class="card-title pink-text text-darken-4">{{livro.titulo}}<i class="material-icons right">close</i>    </span>
-                            <p class="cyan-text text-darken-3">{{livro.desc}}</p>
-                            <p class="red-text text-lighten-2">{{livro.preco}} R$</p>
-                        <div class="card-action" >
+                        <span class="card-title pink-text text-darken-4">{{livro.titulo}}<i
+                                class="material-icons right">close</i>    </span>
+                        <p class="cyan-text text-darken-3">{{livro.desc}}</p>
+                        <p class="red-text text-lighten-2">{{livro.preco}} R$</p>
+                        <div class="card-action">
                             <div class="fixed-action-btn horizontal click-to-toggle bottom-right">
                                 <a class="btn-floating cyan darken-1 btn-large">
-                                  <i class="material-icons">menu</i>
+                                    <i class="material-icons">menu</i>
                                 </a>
                                 <ul>
-                                  <li>
-                                      <a  class="modal-trigger btn-floating yellow darken-1 modal-trigger" href="#commentModal">
-                                          <i class="material-icons">comment</i>
-                                      </a>
+                                    <li>
+                                        <a data-ng-click="lib.select(livro)" class="btn-floating yellow darken-1 modal-trigger"
+                                           href="#commentModal">
+                                            <i class="material-icons">comment</i>
+                                        </a>
                                     </li>
-                                  <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
+                                    <li><a data-ng-click="lib.select(livro)" class=" modal-trigger btn-floating blue" href="#editBook"><i class="material-icons">mode_edit</i></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
         <div id="commentModal" class="modal bottom-sheet">
-            <div class="modal-content" ng-repeat="comment in lib.selected.comments">
-                  <ul class="collapsible" data-collapsible="accordion">
+            <div class="modal-content">
+                <ul class="collapsible" data-collapsible="accordion"  ng-repeat="comment in lib.selected.comments">
                     <li>
-                      <div class="collapsible-header">
-                          <i class="material-icons red-text">filter_drama</i>{{comment.autor}}
-                        </div>
-                      <div class="collapsible-body"><p>{{comment.texto}}</p></div>
+                        <div class="collapsible-header"><i class="material-icons">format_quote</i>{{comment.titulo}}</div>
+                        <div class="collapsible-body"><p>{{comment.texto}}</p></div>
                     </li>
-                  </ul>
+                    <script>$('.collapsible').collapsible();</script>
+                </ul>
             </div>
             <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
     </div>
@@ -203,7 +217,7 @@
     <div class="footer-copyright">
         <div class="container">
             Lucas Cavalcante
-            <a class="grey-text text-lighten-4 right" href="#!">https://github.com/lcavalcante</a>
+            <a class="grey-text text-lighten-4 right" href="#">https://github.com/lcavalcante</a>
         </div>
     </div>
 </footer>
