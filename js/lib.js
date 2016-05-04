@@ -1,77 +1,135 @@
 "use strict";
 
-var victor = null;
-angular.module("lib", [])
-    .controller('libController', function () {
-        var self = this;
-        victor = self;
-        self.livros = [];
-        self.livros.push(l1);
-        self.livros.push(l2);
-        self.livros.push(l3);
-        self.livros.push(l4);
-        self.livros.push(l5);
-        self.livros.push(l6);
-        self.livros.push(l7);
-        self.livros.push(l8);
-        self.livros.push(l9);
-        self.livros.push(l10);
+function libService($http){
+    var service = this;
 
-        self.indiceLivro = 0;
+    service.getLivros = function () {
 
-        self.selected = null;
+        function success(response) {
+            return response.data;
+        }
 
-        self.livro = self.livros[self.indiceLivro];
+        function error(response) {
+            console.log(response.status);
+            return response.data;
+        }
+
+        return $http.get('/api/livro').then(success, error)
+    }
+    
+    service.postLivro = function (data) {
+
+        function success(response) {
+            return response.data;
+        }
+
+        function error(response) {
+            console.log(response.status);
+            return response.data;
+        }
+
+        return $http.post('api/livro', data).then(success, error)
+    }
+    
+    service.putLivro = function (data, id) {
+
+        function success(response) {
+            return response.data;
+        }
+
+        function error(response) {
+            console.log(response.status);
+            return response.data;
+        }
+
+        return $http.put('api/livro/' + id, data).then(success, error)
+    }
+
+}
+
+function libController(libService) {
+    var self = this;
+    victor = self;
+
+    self.livros = [];
+
+    self.getLivros = function () {
+        function success(livros) {
+            self.livros = livros;
+        }
+        
+        libService.getLivros().then(success);
+    };
+    self.getLivros();
+
+    self.indiceLivro = 0;
+
+    self.selected = null;
+
+    self.livro = self.livros[self.indiceLivro];
 
 
-        self.addLivro = function (titulo, autores, desc, foto, preco) {
-            var novoLivro = new Livro(titulo, autores, desc, foto, preco);
+    self.addLivro = function (titulo, autores, desc, foto, preco) {
+        var novoLivro = new Livro(titulo, autores, desc, foto, preco);
+        novoLivro.id = '';
+
+        function success(data) {
             self.livros.push(novoLivro);
-        };
+        }
 
-        self.updateLivro = function (indice, titulo, autores, desc, foto, preco) {
+        function error(data) {
+            console.log(data);
+        }
+
+
+        libService.postLivro(novoLivro).then(success, error);
+    };
+
+    self.updateLivro = function (indice, titulo, autores, desc, foto, preco) {
+       var novoLivro = new Livro(titulo, autores, desc, foto, preco);
+        novoLivro.id = '';
+
+       function success(data) {
             self.livros[indice].setTitulo(titulo);
             self.livros[indice].setAutores(autores);
             self.livros[indice].setDesc(desc);
             self.livros[indice].setFoto(foto);
             self.livros[indice].setPreco(preco);
-        };
+       }
 
-        self.deleteLivro = function (index) {
-            if (index > -1) {
-                self.livros.splice(index, 1);
-            }
-        };
+       function error(data) {
+           console.log(data);
+       }
 
-        self.findLivro = function (title) {
-            for (var i = 0; i < self.livros.length; i++){
-                if(self.livros[i].titulo === title){
-                    return i;
-                }
-            }
-        };
+        libService.putLivro(novoLivro, self.livros[indice].id).then(success, error);
 
-        self.addComment = function (comment) {
-            self.livro.setComment(comment);
-        };
+    };
 
-        self.select = function (book) {
-            self.selected = book;
-        };
-
-        self.next = function () {
-            self.indiceLivro += 1;
-            if (self.indiceLivro >= self.livros.length) {
-                self.indiceLivro = 0;
-            }
-            self.livro = self.livros[self.indiceLivro];
-        };
-        self.prev = function () {
-            self.indiceLivro -= 1;
-            if (self.indiceLivro < 0) {
-                self.indiceLivro = self.livros.length - 1;
-            }
-            self.livro = self.livros[self.indiceLivro];
+    self.deleteLivro = function (index) {
+        if (index > -1) {
+            self.livros.splice(index, 1);
         }
+    };
 
-    });
+    self.findLivro = function (title) {
+        for (var i = 0; i < self.livros.length; i++) {
+            if (self.livros[i].titulo === title) {
+                return i;
+            }
+        }
+    };
+
+    self.addComment = function (comment) {
+        self.livro.setComment(comment);
+    };
+
+    self.select = function (book) {
+        self.selected = book;
+    };
+}
+
+
+var victor = null;
+angular.module("lib", [])
+    .service('libService', libService)
+    .controller('libController', libController);

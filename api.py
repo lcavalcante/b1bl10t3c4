@@ -6,11 +6,11 @@ import model
 
 def as_dict(book):
     return {'id': book.key.id(),
-            'title': book.title,
-            'author': book.author,
-            'price': book.price,
+            'titulo': book.titulo,
+            'autor': book.autor,
+            'preco': book.preco,
             'desc': book.desc,
-            'photo': book.photo}
+            'foto': book.foto}
 
 
 class APIHandler(webapp2.RequestHandler):
@@ -30,24 +30,25 @@ class BookAPI(APIHandler):
 
     def post(self):
         r = json.loads(self.request.body)
-        book = model.insert_book(r['id'], r['title'], r['author'], r['price'], r['desc'], r['photo'])
+        print self.request.body
+        book = model.insert_book(r['id'], r['titulo'], r['autor'], r['preco'], r['desc'], r['foto'])
         r = as_dict(book)
         self.send_json(r)
 
 
 class ParamBook(BookAPI):
     def delete(self, id):
-        model.delete_book(int(id))
+        model.delete_book(id)
         self.response.http_status_message(202)
 
     def put(self, id):
         r = json.loads(self.request.body)
-        book = model.update_book(id, r['title'], r['author'], r['price'], r['desc'], r['photo'])
+        book = model.update_book(id, r['titulo'], r['autor'], r['preco'], r['desc'], r['foto'])
         r = as_dict(book)
         self.send_json(r)
 
 
 app = webapp2.WSGIApplication([
-    ('/api/book', BookAPI),
-    (r'/api/book/(?P<id>[0-9]+)$', ParamBook),
+    ('/api/livro', BookAPI),
+    (r'/api/livro/(?P<id>[0-9]+)$', ParamBook),
 ], debug=True)
