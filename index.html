@@ -6,10 +6,17 @@
     <meta charset='UTF-8'>
 
     <!--Import Google Icon Font-->
-     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/lib.js"></script>
+    <script src="js/index.js"></script>
 </head>
 <body data-ng-app="lib">
 <nav class="cyan lighten-2">
@@ -31,7 +38,7 @@
         </ul>
     </div>
 </nav>
-<div class="container" data-ng-controller="libController as lib">
+<main class="container" data-ng-controller="libController as lib">
     <div class="fixed-action-btn" style="bottom: 5px; right: 24px;">
         <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-3"
            style="bottom: 45px; right: 24px;"
@@ -122,19 +129,19 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <input data-ng-model="lib.selected.foto" placeholder="URL da imagem" id="editFoto"
-                            <input data-ng-model="lib.selected.foto" placeholder="URL da imagem" id="editFoto"
                                    type="url" accept=".jpg" class="validate">
                             <!--<label for="editFoto">Foto</label>-->
                         </div>
                     </div>
                 </form>
                 <form class="col s12">
-                <form class="col s12">
-                    <div class="row">
-                        <label for="editDesc">Descrição</label>
+                    <form class="col s12">
+                        <div class="row">
+                            <label for="editDesc">Descrição</label>
                         <textarea data-ng-model="lib.selected.desc" id="editDesc"
                                   class="materialize-textarea"></textarea>
-                    </div>
+                        </div>
+                    </form>
                 </form>
             </div>
         </div>
@@ -153,7 +160,7 @@
                         $('.modal-trigger').leanModal();
                     });
                 </script>
-                <div class="card ">
+                <div class="    card ">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="fixed-action-btn top-right">
 
@@ -258,7 +265,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 <footer class="page-footer cyan lighten-2">
     <div class="container">
         <div class="row">
@@ -271,16 +278,10 @@
     <div class="footer-copyright">
         <div class="container">
             Lucas Cavalcante
-            <a class="grey-text text-lighten-4 right" href="#">https://github.com/lcavalcante</a>
+            <a id="github-button" href="https://github.com/lcavalcante/b1bl10t3c4" class="btn light-cyan right grey-text text-lighten-5 waves-effect waves-light hide-on-small-only">Github</a>
         </div>
     </div>
 </footer>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-<script src="js/db.js"></script>
-<script src="js/lib.js"></script>
-<script src="js/index.js"></script>
+
 </body>
 </html>

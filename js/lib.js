@@ -101,7 +101,7 @@ function libController(libService) {
        console.log(titulo);
        var novoLivro = new Livro(titulo, autores, desc, foto, preco);
        var indice = self.findLivro(livro.titulo);
-       function success(data) {
+       function success() { 
             self.livros[indice] = novoLivro;
        }
 
