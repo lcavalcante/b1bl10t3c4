@@ -6,7 +6,7 @@
     <meta charset='UTF-8'>
 
     <!--Import Google Icon Font-->
-    <link href="fonts/material-design-icons" rel="stylesheet">
+     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection"/>
@@ -104,7 +104,7 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input data-ng-model="lib.selected.autores" id="editAutor" type="text" class="validate">
+                            <input data-ng-model="lib.selected.autor" id="editAutor" type="text" class="validate">
                             <!--<label for="editAutor">Autor</label>-->
                         </div>
                     </div>
@@ -121,12 +121,14 @@
                 <form class="col s6 ">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input data-ng-model="lib.selected.autores" placeholder="URL da imagem" id="editFoto"
+                            <input data-ng-model="lib.selected.foto" placeholder="URL da imagem" id="editFoto"
+                            <input data-ng-model="lib.selected.foto" placeholder="URL da imagem" id="editFoto"
                                    type="url" accept=".jpg" class="validate">
                             <!--<label for="editFoto">Foto</label>-->
                         </div>
                     </div>
                 </form>
+                <form class="col s12">
                 <form class="col s12">
                     <div class="row">
                         <label for="editDesc">Descrição</label>
@@ -137,14 +139,20 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a data-ng-click="lib.updateLivro(lib.livros[lib.id].titulo, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)"
+            <a data-ng-click="lib.updateLivro(lib.selected ,lib.selected.titulo, lib.selected.autor, lib.selected.desc, lib.selected.foto, lib.selected.preco)"
                href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
         </div>
     </div>
 
     <div class="section">
         <div class="row">
-            <div class="col s12 m12 l4" data-ng-repeat="livro in lib.livros">
+            <div class="col s12 m12 l4" ng-repeat="livro in lib.livros">
+                <script>
+                    $(document).ready(function () {
+                        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+                        $('.modal-trigger').leanModal();
+                    });
+                </script>
                 <div class="card ">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="fixed-action-btn top-right">
@@ -163,10 +171,11 @@
                         </a>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title pink-text text-darken-4">{{livro.titulo}}<i
-                                class="material-icons right">close</i>    </span>
+                <span class="card-title pink-text text-darken-4">{{livro.titulo}}<i
+                        class="material-icons right">close</i>    </span>
                         <p class="cyan-text text-darken-3">{{livro.desc}}</p>
                         <p class="red-text text-lighten-2">{{livro.preco}} R$</p>
+
                         <div class="card-action">
                             <div class="fixed-action-btn horizontal click-to-toggle bottom-right">
                                 <a class="btn-floating cyan darken-1 btn-large">
@@ -182,7 +191,7 @@
                                     </li>
                                     <li>
                                         <a ng-click="lib.select(livro)" class=" modal-trigger btn-floating blue"
-                                           data-target="editBook">
+                                           href="#editBook">
                                             <i class="material-icons">mode_edit</i>
                                         </a>
                                     </li>

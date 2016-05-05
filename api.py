@@ -38,12 +38,12 @@ class BookAPI(APIHandler):
 
 class ParamBook(BookAPI):
     def delete(self, id):
-        model.delete_book(id)
+        model.delete_book(int(id))
         self.response.http_status_message(202)
 
     def put(self, id):
         r = json.loads(self.request.body)
-        book = model.update_book(id, r['titulo'], r['autor'], r['preco'], r['desc'], r['foto'])
+        book = model.update_book(int(id), r['titulo'], r['autor'], r['preco'], r['desc'], r['foto'])
         r = as_dict(book)
         self.send_json(r)
 
