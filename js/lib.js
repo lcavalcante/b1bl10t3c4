@@ -1,5 +1,17 @@
 "use strict";
 
+
+function livroFactory(titulo, autores, desc, foto, preco) {
+    return {
+        titulo: titulo,
+        autor: autores,
+        desc: desc,
+        foto: foto,
+        preco: preco,
+        comments: []
+    };
+}
+
 function libService($http){
     var service = this;
 
@@ -16,7 +28,7 @@ function libService($http){
 
         return $http.get('/api/livro').then(success, error)
     };
-    
+
     service.postLivro = function (data) {
 
         function success(response) {
@@ -30,7 +42,7 @@ function libService($http){
 
         return $http.post('api/livro', data).then(success, error)
     };
-    
+
     service.putLivro = function (data, id) {
 
         function success(response) {
@@ -64,6 +76,8 @@ function libService($http){
 function libController(libService) {
     var self = this;
     debug = self;
+    debug.factory = livroFactory;
+
 
     self.livros = [];
 
@@ -82,7 +96,7 @@ function libController(libService) {
     self.selected = null;
 
     self.addLivro = function (titulo, autores, desc, foto, preco) {
-        var novoLivro = new Livro(titulo, autores, desc, foto, preco);
+        var novoLivro = livroFactory(titulo,autores,desc,foto,preco);
         novoLivro.id = '';
 
         function success() {
@@ -99,9 +113,9 @@ function libController(libService) {
 
     self.updateLivro = function (livro, titulo, autores, desc, foto, preco) {
        console.log(titulo);
-       var novoLivro = new Livro(titulo, autores, desc, foto, preco);
+       var novoLivro = livroFactory(titulo, autores, desc, foto, preco);
        var indice = self.findLivro(livro.titulo);
-       function success() { 
+       function success() {
             self.livros[indice] = novoLivro;
        }
 
@@ -148,5 +162,6 @@ function libController(libService) {
 
 var debug = null;
 angular.module("lib", [])
+    .factory('livroFactory', livroFactory)
     .service('libService', libService)
     .controller('libController', libController);

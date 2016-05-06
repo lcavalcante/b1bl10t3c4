@@ -14,6 +14,12 @@ def all_books():
     return Book.query()
 
 
+def query_book(number):
+    key = ndb.Key(Book, number)
+    book = key.get()
+    return book
+
+
 def insert_book(id, titulo, autor, preco, desc, foto):
     book = Book(id=id, titulo=titulo, autor=autor, preco=preco, desc=desc, foto=foto)
     book.put()

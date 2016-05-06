@@ -37,6 +37,11 @@ class BookAPI(APIHandler):
 
 
 class ParamBook(BookAPI):
+    def get(self, id):
+        book = model.query_book(int(id))
+        r = [as_dict(book)]
+        self.send_json(r)
+
     def delete(self, id):
         model.delete_book(int(id))
         self.response.http_status_message(202)
