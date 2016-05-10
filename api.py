@@ -1,7 +1,14 @@
 import webapp2
 import json
-
 import model
+
+
+def comment_dict(comment):
+    print comment
+    return {
+            'titulo': comment.titulo,
+            'autor': comment.autor,
+            'texto': comment.texto}
 
 
 def as_dict(book):
@@ -10,7 +17,8 @@ def as_dict(book):
             'autor': book.autor,
             'preco': book.preco,
             'desc': book.desc,
-            'foto': book.foto}
+            'foto': book.foto,
+            'comments': [comment_dict(comment) for comment in book.comments]}
 
 
 class APIHandler(webapp2.RequestHandler):
@@ -22,6 +30,19 @@ class APIHandler(webapp2.RequestHandler):
         self.response.write(json.dumps(r))
 
 
+class CommentAPI(APIHandler):
+    def get(self, id):
+        book = model.query_book(int(id))
+        r = [comment_dict(comment) for comment in book.comments]
+        self.send_json(r)
+
+    def post(self, id):
+        r = json.loads(self.request.body)
+        comment = model.insert_comment(int(id), r['id'], r['titulo'], r['autor'], r['texto'])
+        r = comment_dict(comment)
+        self.send_json(r)
+
+
 class BookAPI(APIHandler):
     def get(self):
         books = model.all_books()
@@ -30,7 +51,6 @@ class BookAPI(APIHandler):
 
     def post(self):
         r = json.loads(self.request.body)
-        print self.request.body
         book = model.insert_book(r['id'], r['titulo'], r['autor'], r['preco'], r['desc'], r['foto'])
         r = as_dict(book)
         self.send_json(r)
@@ -56,4 +76,5 @@ class ParamBook(BookAPI):
 app = webapp2.WSGIApplication([
     ('/api/livro', BookAPI),
     (r'/api/livro/(?P<id>[0-9]+)$', ParamBook),
+    (r'/api/livro/(?P<id>[0-9]+)/comentario$', CommentAPI),
 ], debug=True)

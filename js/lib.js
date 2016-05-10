@@ -12,7 +12,7 @@ function livroFactory(titulo, autores, desc, foto, preco) {
     };
 }
 
-function libService($http){
+function libService($http) {
     var service = this;
 
     service.getLivros = function () {
@@ -71,7 +71,60 @@ function libService($http){
         return $http.delete('api/livro/' + id).then(success, error);
     }
 
+    service.getComentario = function (livroId) {
+        function success(response) {
+            return response.data;
+        }
+
+        function error(response) {
+            return response.data;
+        }
+
+        return $http.get('api/livro/' + livroId + '/comentario').then(success, error);
+    };
+
+    service.postComentario = function (livroId, data) {
+        function success(response) {
+            return response.data;
+        }
+
+        function error(response) {
+            console.log(response.status);
+            return response.data;
+        }
+
+        return $http.post('api/livro/' + livroId + '/comentario', data).then(success, error);
+    }
 }
+
+// function commentService($http) {
+//     var service = this;
+//
+//     service.getComentario = function (livroId) {
+//         function success(response) {
+//             return response.data;
+//         }
+//
+//         function error(response) {
+//             return response.data;
+//         }
+//
+//         return $http.get('api/livro/' + livroId + '/comentario').then(success, error);
+//     };
+//
+//     service.postComentario = function (livroId, data) {
+//         function success(response) {
+//             return response.data;
+//         }
+//
+//         function error(response) {
+//             console.log(response.status);
+//             return response.data;
+//         }
+//
+//         return $http.post('api/livro/' + livroId + '/comentario', data).then(success, error);
+//     }
+// }
 
 function libController(libService) {
     var self = this;
@@ -96,7 +149,7 @@ function libController(libService) {
     self.selected = null;
 
     self.addLivro = function (titulo, autores, desc, foto, preco) {
-        var novoLivro = livroFactory(titulo,autores,desc,foto,preco);
+        var novoLivro = livroFactory(titulo, autores, desc, foto, preco);
         novoLivro.id = '';
 
         function success() {
@@ -112,18 +165,19 @@ function libController(libService) {
     };
 
     self.updateLivro = function (livro, titulo, autores, desc, foto, preco) {
-       console.log(titulo);
-       var novoLivro = livroFactory(titulo, autores, desc, foto, preco);
-       var indice = self.findLivro(livro.titulo);
-       function success() {
+        console.log(titulo);
+        var novoLivro = livroFactory(titulo, autores, desc, foto, preco);
+        var indice = self.findLivro(livro.titulo);
+
+        function success() {
             self.livros[indice] = novoLivro;
-       }
+        }
 
-       function error(data) {
-           console.log(data);
-       }
+        function error(data) {
+            console.log(data);
+        }
 
-       libService.putLivro(novoLivro, self.livros[indice].id).then(success, error);
+        libService.putLivro(novoLivro, self.livros[indice].id).then(success, error);
 
     };
 
@@ -150,8 +204,33 @@ function libController(libService) {
         }
     };
 
-    self.addComment = function (comment) {
-        self.livro.setComment(comment);
+    self.loadComments = function (bookId) {
+        function success(comments) {
+
+        }
+
+
+        commentService.getComentario(bookId).then(success, error);
+    };
+
+    self.addComment = function (autor, titulo, texto) {
+        console.log("CHAMA?");
+        var comment = {
+            id: '',
+            autor: autor,
+            titulo: titulo,
+            texto: texto
+        };
+
+        function success() {
+            self.selected.comments.push(comment)
+        }
+
+        function error(data) {
+            console.log(data)
+        }
+
+        libService.postComentario(self.selected.id, comment).then(success, error);
     };
 
     self.select = function (book) {
