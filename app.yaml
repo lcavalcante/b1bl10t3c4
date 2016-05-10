@@ -1,5 +1,5 @@
 application: b1bl10t3c4
-version: 1
+version: 2c
 runtime: python27
 api_version: 1
 threadsafe: yes

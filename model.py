@@ -33,8 +33,8 @@ def insert_book(id, titulo, autor, preco, desc, foto):
     return book
 
 
-def update_book(id, titulo, autor, preco, desc, foto, comments):
-    book = Book(id=id, titulo=titulo, autor=autor, preco=preco, desc=desc, foto=foto, comments=comments)
+def update_book(id, titulo, autor, preco, desc, foto):
+    book = Book(id=id, titulo=titulo, autor=autor, preco=preco, desc=desc, foto=foto)
     book.put()
     return book
 

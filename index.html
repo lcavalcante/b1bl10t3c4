@@ -6,7 +6,7 @@
     <meta charset='UTF-8'>
 
     <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection"/>
@@ -92,7 +92,9 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a data-ng-click="lib.addLivro(lib.newTitle, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice)" href="#"
+            <a data-ng-click="lib.addLivro(lib.newTitle, lib.newAutor, lib.newDesc, lib.newFoto, lib.newPrice);
+                              lib.newTitle=null;lib.newAutor=null;lib.newDesc=null;lib.newFoto=null;lib.newPrice=null;"
+               href="#"
                class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
         </div>
     </div>
@@ -261,7 +263,7 @@
             </div>
             <div class="modal-footer">
                 <a data-ng-click="lib.addComment(lib.newCommentAutor, lib.newCommentTitle, lib.newCommentDesc)"
-                   href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">CADE</a>
+                   href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">Adicionar</a>
             </div>
         </div>
     </div>
